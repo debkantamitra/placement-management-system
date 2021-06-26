@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/admin_home"><i class="fas fa-envelope-open-text"></i>  Placement Management System</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link " aria-current="page" href='/admin_home'>Home</a>
+          <a class="nav-link" href="/students">Candidate</a>
+          <a class="nav-link text-success active" href="/new_drive">Post new drive</a>
+          <a class="nav-link text-danger" href="/home"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+    <div class="container ">
+    <div class="row mt-5 mb-5">
+    <div class="col-md-6 m-auto">
+        <h3 class="mb-5 text-center">Drive information</h3>
+        <%- include('./partials/message')%>
+        <form action="/new_drive" method="POST">
+            <div class="row mb-4">
+                <label for="drive_id" class="col-sm-2 col-form-label">Drive Id</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="drive_id" name="drive_id">
+                </div>
+              </div>
+            <div class="row">
+              <label for="company_name" class="col-sm-2 col-form-label">Company Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="company_name" name="comp_name">
+              </div>
+            </div>
+            <div class="row mb-4">
+              <label for="role" class="col-sm-2 col-form-label">Job Role</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="role" name="role">
+              </div>
+            </div>
+            <div class="row mb-4">
+                <label for="salary" class="col-sm-2 col-form-label">Package</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="salary" name="salary">
+                </div>
+              </div>
+              <div class="row">
+                <label for="perc_criteria" class="col-sm-2 col-form-label">Percentage criteria</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="perc_criteria" name="perc_criteria">
+                </div>
+              </div>
+              <div class="row">
+                <label for="back_criteria" class="col-sm-2 col-form-label">Backlog criteria</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="back_criteria" name="back_criteria">
+                </div>
+              </div>
+              <div class="row mb-4">
+                <label for="test_date" class="col-sm-2 col-form-label">Test date</label>
+                <div class="col-sm-10">
+                  <input type="date" class="form-control" id="test_date" name="test_date">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="link" class="col-sm-2 col-form-label">Apply link</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="link" name="link">
+                </div>
+              </div>
+            <button type="submit" class="btn btn-primary btn-block mt-4">Notify</button>
+          </form>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
