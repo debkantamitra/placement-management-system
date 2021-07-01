@@ -194,9 +194,17 @@ app.get('/stud_home', (req, res)=>{
     res.render('stud_home', {data})
 })
 app.get('/students', (req, res)=>{
-    student.find()
+    student.find({})
         .then(data =>{
-            res.render('students', {data})
+            res.render('students')
+        })
+        .catch(err => console.log(err))
+})
+
+app.get('/students/api', (req, res)=>{
+    student.find({})
+        .then(data =>{
+            res.send({data})
         })
         .catch(err => console.log(err))
 })
@@ -214,7 +222,14 @@ app.get('/todoist', (req, res)=> {
     res.render('todoist')
 })
 
+app.get('/students/:id', (req, res) => {
+    student.findByIdAndDelete({_id: req.params.id})
+                .then((data)=> res.redirect("/students"))
+                .catch( err => console.log(err))
+})
+
 //server listener
 app.listen(3000, (req, res) => {
     console.log('Listening on server port: 3000!');
 })
+

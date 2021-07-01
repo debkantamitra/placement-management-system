@@ -22,5 +22,14 @@
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "mongoose": "^5.12.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/me-deve/Placement_management_system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/me-deve/Placement_management_system/issues"
+  },
+  "homepage": "https://github.com/me-deve/Placement_management_system#readme"
 }

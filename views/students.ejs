@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+
 <body>
+  <style>
+    .btn{
+      margin-top: 0;
+    }
+  </style>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="/admin_home"><i class="fas fa-envelope-open-text"></i>  Placement Management System</a>
@@ -23,86 +21,36 @@
           </div>
         </div>
       </nav>
-    <section id='text'>
-        <figure class="text-center mt-5">
-            <blockquote class="blockquote">
-              <h3>Below is the list of all students who're registered!</h3>
-              <br>
-              <br>
-              <div class="container">
-                <%- include('./partials/message')%>
-              </div>
-            </blockquote>
-          </figure>
-    </section>
-    <section id='main' class="container">
-        <table class="table table-dark table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Candidate name</th>
-                <th scope="col">Stream</th>
-                <th scope="col">Email Id</th>
-                <th scope="col">Status</th>
-                <th scope="col">Other info</th>
-              </tr>
-            </thead>
-            <tbody>
-            <% for(let i=0;i<data.length;i++){ %>
+      <div class="container mt-5" style="width: 300%;">
+        <div class="row">
+          <div class="col-md-6 m-auto">
+            <h3 class="text-center mb-3"><i class="fas fa-search"></i> Student Lookup</h3>
+            <div class="form-group">
+              <input
+                type="text"
+                id="search"
+                placeholder="Enter student User ID"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <table class="table table-dark">
+              <thead>
                 <tr>
-                <td><%= data[i].name %></td>
-                <% if (data[i].stream=="bca") { %>
-                    <td>Bachelor of Computer Application</td>
-                <% }else{ %>
-                    <td>Bachelor of Business Administration</td>
-                <% } %>
-                <td><%= data[i].email %> </td>
-                <td>--</td>
-                <td>
-                  <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="buttonCheck">
-                    Check
-                    </button>
-                    
-                    <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Other information</h5>
-                          </div>
-                          <div class="modal-body">
-                              <span class="text-info">SSC percentage:</span> <%= data[i].ssc_perc %>
-                            <br>
-                            <span class="text-info"> HSC percentage:</span>:</span> <%= data[i].hsc_perc %>
-                            <br>
-                            <span class="text-info"> Graduation percentage:</span>:</span> <%= data[i].grad_perc %>
-                            <br>
-                            <span class="text-info"> No. of active baclogs:</span>:</span> <%= data[i].backlog %>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </td>   
-              </tr>
-            <% } %>  
-            </tbody>
-          </table>
-    </section>
-    <script>
-      document.getElementById("buttonCheck").addEventListener("click", ()=>{
-        let xhr = new XMLHttpRequest();
-  
-        xhr.open("GET", "/students", true)
-            
-        if(this.status== 200){
-          console.log("..")
-        }
+                  <th scope="col">Candidate name</th>
+                  <th scope="col">Stream</th>
+                  <th scope="col">Email Id</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Other info</th>
+                  <th scope="col">Remove</th>
+                </tr>
+              </thead>
+              <tbody id="match-list">
 
-        xhr.send()
-      })
-    </script>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <script src="/assets/students.js"></script>
 </body>
 </html>

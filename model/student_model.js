@@ -33,6 +33,11 @@ const student_schema = new mongoose.Schema({
     password:{
         type: String,
         required: true
+    },
+    status:{
+        type: Boolean,
+        default: false,
+        required: true
     }
 })
 
