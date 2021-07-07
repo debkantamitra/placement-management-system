@@ -1,3 +1,4 @@
+//dependecies
 const express = require('express')
 const ejs = require('ejs')
 const mongoose = require('mongoose')
@@ -5,8 +6,11 @@ const bodyparser = require('body-parser')
 const expressLayouts= require('express-ejs-layouts')
 const {google} = require('googleapis')
 const nMailer = require('nodemailer')
+
+//express app initialization
 const app = express()
 
+// Credentials for nodemailer
 const CLIENT_ID = '787249082746-i00gjsp26nm4752q51te7ss00mlpeeno.apps.googleusercontent.com'
 const CLIENT_SECRET = 'KSLo9-La4T4p6BHA9lt7cv1N'
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
@@ -17,8 +21,10 @@ const oAuth2Client = new google.auth.OAuth2(
     CLIENT_SECRET,
     REDIRECT_URI
 );
+
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
+//atributes
 let my_data="";
 let user_name="";
  
