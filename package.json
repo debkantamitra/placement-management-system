@@ -21,9 +21,10 @@
     "ejs-layout": "^1.0.15",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
-    "mongoose": "^5.12.2"
+    "googleapis": "^80.1.0",
+    "mongoose": "^5.12.2",
+    "nodemailer": "^6.6.2"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/me-deve/Placement_management_system.git"

@@ -14,7 +14,7 @@ fetch('/students/api').then(res => res.json()).then(data => {
         <tr>
         <td>${match.name}</td>
         <td>${match.stream === 'bca' ? 'Bachelor of Computer Application': 'Bachelor of Business Administration'}</td>
-        <td>${match.name} </td>
+        <td>${match.email} </td>
         <td>${match.status}</td>
         <td>
           <!-- Button trigger modal -->
@@ -81,7 +81,7 @@ const search = document.getElementById('search').addEventListener('input', (e)=>
               <tr>
               <td>${match.name}</td>
               <td>${match.stream === 'bca' ? 'Bachelor of Computer Application': 'Bachelor of Business Administration'}</td>
-              <td>${match.name} </td>
+              <td>${match.email} </td>
               <td>${match.status}</td>
               <td>
                 <!-- Button trigger modal -->

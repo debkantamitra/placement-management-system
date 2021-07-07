@@ -3,10 +3,25 @@ const ejs = require('ejs')
 const mongoose = require('mongoose')
 const bodyparser = require('body-parser')
 const expressLayouts= require('express-ejs-layouts')
+const {google} = require('googleapis')
+const nMailer = require('nodemailer')
 const app = express()
 
-let my_data;
+const CLIENT_ID = '787249082746-i00gjsp26nm4752q51te7ss00mlpeeno.apps.googleusercontent.com'
+const CLIENT_SECRET = 'KSLo9-La4T4p6BHA9lt7cv1N'
+const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
+const REFRESH_TOKEN = '1//04Sl8Xau371UzCgYIARAAGAQSNwF-L9IrIBXqdXrg9IvJnQrS2qTJ4RTpEB0OzYmt4odxNT5BZs7JKo19ppoUwIQ5jecb6wfHyOc'
 
+const oAuth2Client = new google.auth.OAuth2(
+    CLIENT_ID,
+    CLIENT_SECRET,
+    REDIRECT_URI
+);
+oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+
+let my_data="";
+let user_name="";
+ 
 //importing database models
 const student = require('./model/student_model')
 const drive = require('./model/drive_model')
@@ -110,7 +125,8 @@ app.post('/stud_log', (req, res) => {
                     res.render('stud_log', {errors})
                 }
                 if(data.password==password){
-                    my_data = data
+                    my_data = {ssc: data.ssc_perc, hsc: data.hsc_perc}
+                    user_name = data.name;
                     res.render('stud_home', {data})
                 }else{
                     errors.push({msg: "Wrong password"})
@@ -155,6 +171,47 @@ app.get('/new_drive', (req, res) => {
 
 app.post('/new_drive', (req, res) => {
     const {drive_id, comp_name, role, salary, perc_criteria, back_criteria, test_date, link} = req.body
+
+    //crucial fix for mailing feature
+    student.find({}).then(data => {
+             let filtered = data.filter(foo => foo.ssc_perc>=perc_criteria && foo.hsc_perc>=perc_criteria)
+             let emails = filtered.map(data => data.email)
+                async function sendMail() {
+                    try {
+                    const accessToken = await oAuth2Client.getAccessToken();
+                
+                    const transport = nMailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                        type: 'OAuth2',
+                        user: 'debkantamitra52@gmail.com',
+                        clientId: CLIENT_ID,
+                        clientSecret: CLIENT_SECRET,
+                        refreshToken: REFRESH_TOKEN,
+                        accessToken: accessToken,
+                        },
+                    });
+                
+                    const mailOptions = {
+                        from: 'Training and Placement <debkantamitra52@gmail.com>',
+                        to: emails,
+                        subject: `${comp_name} drive update!`,
+                        text: `${comp_name} drive update!`,
+                        html: `<p>Dear student, please check the training and placement website for ${comp_name} drive and more information. </p>`,
+                    };
+                
+                    const result = await transport.sendMail(mailOptions);
+                    return result;
+                    } catch (error) {
+                    return error;
+                    }
+                }
+                
+                sendMail()
+                    .then((result) => console.log('Email has been successfully sent!', result))
+                    .catch((error) => console.log(error.message));
+    })
+
     let errors = []
     let message = []
     if(!drive_id || !comp_name || !role || !salary|| !perc_criteria || !back_criteria || !test_date || !link){
@@ -189,8 +246,16 @@ app.post('/new_drive', (req, res) => {
     }
 })
 
+//filtered list of students
+// app.get("/eligible_students/api", (req, res)=>{
+//     student.find({}).then(data => {
+//         let filtered = data.filter(foo => foo.ssc_perc>=40 && foo.hsc_perc>=40)
+//         res.send(filtered)
+//     })
+// })
+
 app.get('/stud_home', (req, res)=>{
-    const data = my_data
+    const data = {name: user_name}
     res.render('stud_home', {data})
 })
 app.get('/students', (req, res)=>{
@@ -209,9 +274,19 @@ app.get('/students/api', (req, res)=>{
         .catch(err => console.log(err))
 })
 
+app.get('/drive_update/api', (req, res) => {
+    drive.find()
+
+        .then(data => {
+            res.send(data.filter(foo => foo.perc_criteria <= my_data.ssc && foo.perc_criteria <= my_data.hsc))
+        })
+        .catch(err => console.log(err))
+})
+
 app.get('/drive_update', (req, res) => {
     drive.find()
-        .then(data => {
+        .then(datas => {
+            let data = datas.filter(foo => foo.perc_criteria <= my_data.ssc && foo.perc_criteria <= my_data.hsc)
             res.render('drive_updates', {data})
         })
         .catch(err => console.log(err))
