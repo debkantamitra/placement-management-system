@@ -52,7 +52,7 @@ app.use(expressLayouts)
 app.use('/assets', express.static(__dirname + '/assets'));
 
 //routes
-app.get('/home', (req, res) => {
+app.get('/home' || '/', (req, res) => {
     res.render('home')
 })
 
