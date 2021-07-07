@@ -310,7 +310,7 @@ app.get('/students/:id', (req, res) => {
 })
 
 //server listener
-app.listen(3000, (req, res) => {
+app.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Listening on server port: 3000!');
 })
 
