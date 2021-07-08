@@ -17,12 +17,6 @@ const CLIENT_SECRET = 'KSLo9-La4T4p6BHA9lt7cv1N'
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
 const REFRESH_TOKEN = '1//04Sl8Xau371UzCgYIARAAGAQSNwF-L9IrIBXqdXrg9IvJnQrS2qTJ4RTpEB0OzYmt4odxNT5BZs7JKo19ppoUwIQ5jecb6wfHyOc'
 
-//Credentials for Nodemailer
-const CLIENT_ID = 'YOUR CLIENT ID'
-const CLIENT_SECRET = 'YOUR CLIENT SECRET'
-const REDIRECT_URI = ''
-const REFRESH_TOKEN = ''
-
 const oAuth2Client = new google.auth.OAuth2(
     CLIENT_ID,
     CLIENT_SECRET,
