@@ -10,11 +10,19 @@ const nMailer = require('nodemailer')
 //express app initialization
 const app = express()
 
+<<<<<<< HEAD
 // Credentials for nodemailer
 const CLIENT_ID = '787249082746-i00gjsp26nm4752q51te7ss00mlpeeno.apps.googleusercontent.com'
 const CLIENT_SECRET = 'KSLo9-La4T4p6BHA9lt7cv1N'
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
 const REFRESH_TOKEN = '1//04Sl8Xau371UzCgYIARAAGAQSNwF-L9IrIBXqdXrg9IvJnQrS2qTJ4RTpEB0OzYmt4odxNT5BZs7JKo19ppoUwIQ5jecb6wfHyOc'
+=======
+//Credentials for Nodemailer
+const CLIENT_ID = 'YOUR CLIENT ID'
+const CLIENT_SECRET = 'YOUR CLIENT SECRET'
+const REDIRECT_URI = ''
+const REFRESH_TOKEN = ''
+>>>>>>> 9a0ae6da95eda78bc43321b56185a09a30a876f8
 
 const oAuth2Client = new google.auth.OAuth2(
     CLIENT_ID,
@@ -194,7 +202,7 @@ app.post('/new_drive', (req, res) => {
                         service: 'gmail',
                         auth: {
                         type: 'OAuth2',
-                        user: 'debkantamitra52@gmail.com',
+                        user: '',
                         clientId: CLIENT_ID,
                         clientSecret: CLIENT_SECRET,
                         refreshToken: REFRESH_TOKEN,
@@ -203,7 +211,7 @@ app.post('/new_drive', (req, res) => {
                     });
                 
                     const mailOptions = {
-                        from: 'Training and Placement <debkantamitra52@gmail.com>',
+                        from: 'Training and Placement <>',
                         to: emails,
                         subject: `${comp_name} drive update!`,
                         text: `${comp_name} drive update!`,
