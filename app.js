@@ -10,7 +10,6 @@ const nMailer = require('nodemailer')
 //express app initialization
 const app = express()
 
-
 // Credentials for nodemailer
 const CLIENT_ID = '787249082746-i00gjsp26nm4752q51te7ss00mlpeeno.apps.googleusercontent.com'
 const CLIENT_SECRET = 'KSLo9-La4T4p6BHA9lt7cv1N'
@@ -53,10 +52,6 @@ app.use(expressLayouts)
 app.use('/assets', express.static(__dirname + '/assets'));
 
 //routes
-app.get('/', (req, res) => {
-    res.render('home')
-})
-
 app.get('/home', (req, res) => {
     res.render('home')
 })
@@ -195,7 +190,7 @@ app.post('/new_drive', (req, res) => {
                         service: 'gmail',
                         auth: {
                         type: 'OAuth2',
-                        user: '',
+                        user: 'debkantamitra52@gmail.com',
                         clientId: CLIENT_ID,
                         clientSecret: CLIENT_SECRET,
                         refreshToken: REFRESH_TOKEN,
@@ -204,7 +199,7 @@ app.post('/new_drive', (req, res) => {
                     });
                 
                     const mailOptions = {
-                        from: 'Training and Placement <>',
+                        from: 'Training and Placement <debkantamitra52@gmail.com>',
                         to: emails,
                         subject: `${comp_name} drive update!`,
                         text: `${comp_name} drive update!`,
