@@ -38,6 +38,10 @@ const student_schema = new mongoose.Schema({
         type: Boolean,
         default: false,
         required: true
+    },
+    phone_number:{
+        type: Number,
+        required: true
     }
 })
 

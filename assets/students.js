@@ -7,6 +7,8 @@ let html="";
 
 fetch('/students/api').then(res => res.json()).then(data => {
 
+  console.log(data.data)
+
   matches = data.data.map( foo => foo)
 
   html = matches.map(match => {
@@ -37,6 +39,8 @@ fetch('/students/api').then(res => res.json()).then(data => {
                     <span class="text-info"> Graduation percentage:</span>:</span> ${match.grad_perc}
                     <br>
                     <span class="text-info"> No. of active baclogs:</span>:</span> ${match.backlog}
+                    <br>
+                    <span class="text-info"> Phone No:</span>:</span> ${match.phone_number}
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
@@ -104,6 +108,8 @@ const search = document.getElementById('search').addEventListener('input', (e)=>
                           <span class="text-info"> Graduation percentage:</span>:</span> ${match.grad_perc}
                           <br>
                           <span class="text-info"> No. of active baclogs:</span>:</span> ${match.backlog}
+                          <br>
+                          <span class="text-info"> Phone No:</span>:</span> ${match.phone_number}
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>

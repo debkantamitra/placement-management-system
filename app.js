@@ -11,10 +11,10 @@ const nMailer = require('nodemailer')
 const app = express()
 
 // Credentials for nodemailer
-const CLIENT_ID = '787249082746-i00gjsp26nm4752q51te7ss00mlpeeno.apps.googleusercontent.com'
-const CLIENT_SECRET = 'KSLo9-La4T4p6BHA9lt7cv1N'
+const CLIENT_ID = '898871704556-ionugmola659v8kldrosi2ttf9384rni.apps.googleusercontent.com'
+const CLIENT_SECRET = 'va3Q-MGtyWAca40vmxEBTsq_'
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
-const REFRESH_TOKEN = '1//04Sl8Xau371UzCgYIARAAGAQSNwF-L9IrIBXqdXrg9IvJnQrS2qTJ4RTpEB0OzYmt4odxNT5BZs7JKo19ppoUwIQ5jecb6wfHyOc'
+const REFRESH_TOKEN = '1//04pGSRo_h8u18CgYIARAAGAQSNwF-L9IreIeY4rL0ObJoTs8OgQY9SuiOLCv3FhvL3EdVLdYzc5Gmq8iGXWePJJL1hjv4Ag0WBwQ'
 
 const oAuth2Client = new google.auth.OAuth2(
     CLIENT_ID,
@@ -61,12 +61,12 @@ app.get('/stud_reg', (req, res) => {
 })
 
 app.post('/stud_reg', (req, res) => {
-    const {name,streams,backs,ssc_perc,hsc_perc,grad_perc,email,password,password2}=req.body;
+    const {name,streams,backs,ssc_perc,hsc_perc,grad_perc,email,password,password2, phone_number}=req.body;
     let errors= [];
 
     //Validation
     //check required fields
-    if(!name || !email || !password || !password2 || !backs || !ssc_perc || !hsc_perc || !grad_perc){
+    if(!name || !email || !password || !password2 || !backs || !ssc_perc || !hsc_perc || !grad_perc || !phone_number){
         errors.push({msg:"Please fill all the required fields."})
     }
 
@@ -99,11 +99,13 @@ app.post('/stud_reg', (req, res) => {
             hsc_perc: hsc_perc,
             grad_perc: grad_perc,
             email: email,
-            password: password
+            password: password,
+            phone_number: phone_number
           });
           newUser
             .save()
             .then(user => {
+                console.log(user)
               res.redirect('/stud_log');
             })
             .catch(err => console.log(err));
@@ -267,7 +269,8 @@ app.get('/stud_home', (req, res)=>{
 app.get('/students', (req, res)=>{
     student.find({})
         .then(data =>{
-            res.render('students')
+            console.log(data)
+            res.render('students', data)
         })
         .catch(err => console.log(err))
 })
@@ -310,7 +313,7 @@ app.get('/students/:id', (req, res) => {
 })
 
 //server listener
-app.listen(process.env.PORT || 3000, (req, res) => {
-    console.log('Listening on server port: 3000!');
+app.listen(process.env.PORT || 8080, (req, res) => {
+    console.log('Listening on server port: 8080!');
 })
 
