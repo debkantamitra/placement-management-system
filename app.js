@@ -300,6 +300,14 @@ app.get('/drive_update', (req, res) => {
         })
         .catch(err => console.log(err))
 })
+
+app.get('/drives', (req, res) => {
+    drive.find()
+        .then(datas => {
+            res.render('drive_updates', {data})
+        })
+        .catch(err => console.log(err))
+})
 // latest routes
 // Admin can add students who're already placed!  *will be modified*
 app.get('/todoist', (req, res)=> {
@@ -313,7 +321,7 @@ app.get('/students/:id', (req, res) => {
 })
 
 //server listener
-app.listen(process.env.PORT || 8080, (req, res) => {
+app.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Listening on server port: 8080!');
 })
 
