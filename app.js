@@ -33,7 +33,7 @@ const student = require('./model/student_model')
 const drive = require('./model/drive_model')
 
 //mongodb atlas connection string
-const URI = "mongodb+srv://dm_user123:dm_user123@cluster0.ykkfq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const URI = "mongodb+srv://dm_user123:7001774989@cluster0.ykkfq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 //mongoose database connection
 mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -52,7 +52,7 @@ app.use(expressLayouts)
 app.use('/assets', express.static(__dirname + '/assets'));
 
 //routes
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
     res.render('home')
 })
 
